@@ -1,27 +1,30 @@
 #include "stdio.h"
 
-#define IN 1
-#define OUT 0
+
 
 int main(void) { 
-   int c, nl, nw, nc, state;
-   nl = nw = nc = 0; 
-   while ((c = (getchar())) != EOF) {
-      ++nc;
-      if (c == '\n') {
-         ++nl;
-      }
-      if (c == ' ' || c == '\n' || c == '\t') {
-         state = OUT;
-         putchar('\n');
+   int wordlengthnum[21] = {0};
+   int num;
+   int wordlength = 0;
+   int printchart = 1;
+   int word;
 
+   while ((word = getchar()) != EOF) {
+      if (word == '\t' || word == '\n' || word == ' ') {
+         ++wordlengthnum[wordlength];
+         wordlength = 0;
       }
-      else if (state == OUT) {
-         state = IN;
-         ++nw;
-      }
-      if (state == IN) {
-         putchar(c);
+      else {
+         ++wordlength;
       }
    }
+   
+   for (num = 1; num <= 20; ++num) {
+      printf("%d |", num);
+      for (printchart = 1; printchart <= wordlengthnum[num]; printchart++) {
+         printf("*");
+      }
+      printf("[%d]\n", wordlengthnum[num]);
+   }
+   return 0;
 }
