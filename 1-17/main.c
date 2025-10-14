@@ -17,11 +17,11 @@ int main(void) {
             max = len;
             copy(longest, line);
         }
-        if (max > 80) {
-            printf("%s", longest);
-        }
     }
 
+    if (max > 0) {
+        printf("%s", longest);
+    }
     return 0;
 }
 
