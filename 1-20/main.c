@@ -8,17 +8,15 @@ int my_getline(char str[]);
 
 int main(void) {
     char str[30];
-    int len, offset, position;
+    int len, offset;
     while((len = my_getline(str)) > 0) {
         for (int i = 0; i < len; i++) {
             if (str[i] == '\t') {
                 offset = N - (i % N);
-                len = len + offset -1;
-                position = len - 1;
+                int newlen = len + offset -1;
                 
-                while ((position - offset) != (i - 1)) {
-                    str[position] = str[position - offset + 1];
-                    position--;
+                for (int k = (len - 1); k > i; k--) {
+                    str[k + offset -1] = str[k];
                 }
 
                 while (offset > 0) {
@@ -26,10 +24,13 @@ int main(void) {
                     offset--; 
                 }
 
+                len = newlen;
+
+                i = i + (N - (i % N)) -1;
             }
         }
-        str[len] = '\n';
-        str[len + 1] = '\0';
+
+        str[len] = '\0';
         printf("%s", str);
     }
 
